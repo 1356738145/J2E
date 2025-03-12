@@ -2,41 +2,17 @@ import streamlit as st
 import pandas as pd
 import json
 from io import BytesIO
+from config import SCRIPT_CONFIG as script_config
 
 st.title('智能客服数据分析平台')
+# 动态生成分析模式选项
+analysis_modes = list(script_config.keys())
+script_choice = st.radio("选择分析模式",
+                       analysis_modes,
+                       help="请根据数据内容选择分析类型（配置来自config.py）")
 
-# 脚本选择器
-script_choice = st.radio("选择分析模式", 
-                       ("买家购买决策分析", "有效性回复分析", "退货退款分析", "非满分析"),
-                       help="请根据数据内容选择分析类型")
-
-# 动态配置参数
-script_config = {
-    "买家购买决策分析": {
-        "module": "buyer_decision",
-        "allowed_columns": ["deepseek-r1", "doubao-1.5-pro-32k","doubao-pro-32k"],
-        "output_fields": ['顾客情绪', '一级原因', '二级原因', '具体原因', '客服亮点','建议客服接待策略']
-    },
-    "有效性回复分析": {
-        "module": "reply_analysis",
-        "allowed_columns": ["doubao-pro-32k", "doubao-1.5-pro-32k","deepseek-r1"],
-        "output_fields": ['客户是否针对同一问题重复提问', '一级场景', '二级场景', '具体原因', '客服状态','建议客服接待策略']
-    },
-    "退货退款分析": {
-        "module": "refund_analysis",
-        "allowed_columns": ["doubao-pro-32k","doubao-1.5-pro-32k", "deepseek-r1"],
-        "output_fields": ['退款状态', '一级场景', '二级场景', '具体原因', '客服是否挽留','建议客服接待策略']
-    },
-    "非满分析": {
-        "module": "unsatisfied_analysis",
-        "allowed_columns": ["doubao-pro-32k","doubao-1.5-pro-32k", "deepseek-r1"],
-        "output_fields": ['销售阶段', '一级场景', '二级场景', '具体原因', '是否是客服的原因','建议客服接待策略']
-    },
-}
 config = script_config[script_choice]
 allowed_columns = config['allowed_columns']
-
-
 # 动态导入处理模块
 module = __import__(f"processing_modules.{config['module']}", fromlist=["process_data"])
 process_data = module.process_data
