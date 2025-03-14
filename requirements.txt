@@ -1,5 +1,5 @@
 streamlit
 openpyxl
-matplotlib==3.4.3
-pandas==1.3.4
-numpy==1.21.2
+matplotlib
+pandas
+numpy
