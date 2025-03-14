@@ -43,6 +43,33 @@ if uploaded_file:
     # 执行数据处理（传递当前使用的列）
     df = process_data(df, current_column)
     
+    # 执行数据分析可视化
+    from processing_modules.analyzer import analyze_and_plot
+    if 'output_fields' in config and len(config['output_fields']) > 0:
+        analyze_and_plot(df, config['analysis_data'])
+        
+        # 显示生成的图片
+        st.subheader('分析结果可视化')
+        cols = st.columns(2)  # 创建两列布局
+        for i, field in enumerate(config['analysis_data']):
+            img_path = f"static/images/{field}_distribution.png"
+            with cols[i % 2]:  # 交替放入两列
+                st.image(img_path, 
+                        use_container_width=True,
+                        caption=f"{field}分布图")
+        
+        # 添加自定义CSS样式
+        st.markdown("""
+        <style>
+        .stImage > img {
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        </style>
+        """, unsafe_allow_html=True)
+    else:
+        st.warning("未配置output_fields，跳过分析步骤")
+    
     # 清理空值数据
     if df[current_column].isnull().any():
         invalid_count = df[current_column].isnull().sum()

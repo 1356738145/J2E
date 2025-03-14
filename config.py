@@ -3,7 +3,8 @@ SCRIPT_CONFIG = {
     "买家购买决策分析": {
         "module": "buyer_decision",
         "allowed_columns": ["deepseek-r1", "doubao-1.5-pro-32k","doubao-pro-32k"],
-        "output_fields": ['顾客情绪', '一级原因', '二级原因', '具体原因', '客服亮点','建议客服接待策略']
+        "output_fields": ['顾客情绪', '一级原因', '二级原因', '具体原因', '客服亮点','建议客服接待策略'],
+        "analysis_data": ['顾客情绪', '一级原因', '二级原因', '客服亮点']
     },
     "有效性回复分析": {
         "module": "reply_analysis",

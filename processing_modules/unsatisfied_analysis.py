@@ -17,7 +17,7 @@ def process_data(df, json_column):
         except:
             return (None,)*6
 
-    df[["客户是否针对同一问题重复提问", "一级场景", "二级场景","具体原因","是否是客服的原因", "建议客服接待策略"]] = \
+    df[["销售阶段", "一级场景", "二级场景","具体原因","是否是客服的原因", "建议客服接待策略"]] = \
         df[json_column].apply(lambda x: pd.Series(extract_json(x)))
     
     return df
