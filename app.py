@@ -46,8 +46,6 @@ if uploaded_file:
     # 执行数据分析可视化
     from processing_modules.analyzer import analyze_and_plot
     if 'output_fields' in config and len(config['output_fields']) > 0:
-        # 动态获取当前分析模块配置
-        # 添加调试信息确保配置正确加载
         st.write("当前分析配置：", config)
         if 'analysis_data' in config:
             analyze_and_plot(df, config['analysis_data'])
