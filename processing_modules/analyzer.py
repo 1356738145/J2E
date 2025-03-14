@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
-plt.rcParams['font.sans-serif'] = ['PingFang HK', 'Songti SC', 'Hiragino Sans GB']  # macOS系统字体
+from matplotlib.font_manager import FontProperties
+plt.rcParams['font.sans-serif'] = ['PingFang HK','Songti SC','Hiragino Sans GB'] # macOS系统字体
 plt.rcParams['axes.unicode_minus'] = False  # 解决负号显示问题
 import os
 
