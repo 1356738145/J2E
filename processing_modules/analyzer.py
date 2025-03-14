@@ -1,7 +1,9 @@
 import matplotlib.pyplot as plt
 from matplotlib.font_manager import FontProperties
-plt.rcParams['font.sans-serif'] = ['PingFang HK','Songti SC','Hiragino Sans GB'] # macOS系统字体
-plt.rcParams['axes.unicode_minus'] = False  # 解决负号显示问题
+
+font_path = 'font/SourceHanSansCN-VF.otf'  # 修正字体文件路径
+font = FontProperties(fname=font_path)
+
 import os
 
 def analyze_and_plot(df, output_fields, output_dir='static/images'):
@@ -20,10 +22,10 @@ def analyze_and_plot(df, output_fields, output_dir='static/images'):
         counts = df[field].value_counts()
         
         # 生成饼图
-        plt.figure(figsize=(12, 12), dpi=100)
-        plt.pie(counts, labels=counts.index, autopct='%1.1f%%', 
-                textprops={'fontsize': 12})
-        plt.title(f'{field} Distribution', fontsize=14)
+        plt.figure(figsize=(6, 6), dpi=120)  # 进一步增大画布尺寸和分辨率
+        plt.pie(counts, labels=counts.index, autopct='%1.1f%%',
+                startangle=90, textprops={'fontsize': 24, 'fontproperties': font})
+        plt.title(f'{field} Distribution', fontsize=32, fontproperties=font)
         plt.tight_layout()
         
         # 保存图片
