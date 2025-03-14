@@ -29,5 +29,17 @@ SCRIPT_CONFIG = {
         "allowed_columns": ["doubao-pro-32k","doubao-1.5-pro-32k", "deepseek-r1"],
         "output_fields": ['未购原因', '具体原因', '细分原因', '原因总结', '是否是客服的原因','建议客服接待策略'],
         "analysis_data": ['未购原因', '具体原因', '细分原因', '是否是客服的原因']
+    },
+    "竞争对比分析":{
+        "module": "challenger",
+        "allowed_columns": ["doubao-pro-32k","doubao-1.5-pro-32k", "deepseek-r1"],
+        "output_fields": ['竞争品牌', '一级标签', '二级标签', '具体原因', '客服解决力','建议客服接待策略'],
+        "analysis_data": ['竞争品牌', '一级标签', '二级标签', '客服解决力'] 
+    },
+    "客服商品推荐分析":{
+        "module": "recommand",
+        "allowed_columns": ["doubao-pro-32k","doubao-1.5-pro-32k", "deepseek-r1"],
+        "output_fields": ['顾客情绪', '一级场景', '二级场景', '具体原因', '客服话术','建议采纳话术'],
+        "analysis_data": ['顾客情绪', '一级场景', '二级场景', '客服话术'] 
     }
 }
